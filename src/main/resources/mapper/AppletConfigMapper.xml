@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="xin.zhuyao.tencentbot.mapper.AppletConfigMapper">
+
+    <select id="findByExpress" resultType="xin.zhuyao.tencentbot.pojo.AppletConfig">
+        SELECT * FROM `applet_config` WHERE `express` = #{express}
+    </select>
+
+    <update id="updateBootByExpress">
+        UPDATE `applet_config` SET `app_secret` = #{boot} where `express` = #{express}
+    </update>
+
+</mapper>
