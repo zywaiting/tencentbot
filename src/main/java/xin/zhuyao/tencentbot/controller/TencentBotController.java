@@ -11,8 +11,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import xin.zhuyao.tencentbot.pojo.AppletConfig;
 import xin.zhuyao.tencentbot.pojo.TencentBotReturn;
+import xin.zhuyao.tencentbot.pojo.TencentPictureReturn;
 import xin.zhuyao.tencentbot.service.AppletConfigService;
 import xin.zhuyao.tencentbot.utils.TencentBotUtils;
+import xin.zhuyao.tencentbot.utils.TencentPictureUtils;
 
 /**
  * @Author: zy
@@ -36,7 +38,7 @@ public class TencentBotController {
             @ApiImplicitParam(name = "session",value = "session"),
             @ApiImplicitParam(name = "question",value = "question")
     })
-    public TencentBotReturn TencentBot(String boot,String session, String question) throws Exception {
+    public TencentBotReturn tencentBot(String boot,String session, String question) throws Exception {
         TencentBotReturn tencentBotReturn = new TencentBotReturn();
         AppletConfig tencent = appletConfigService.findByExpress("tencent");
         if ("开机".equals(boot)) {
@@ -58,6 +60,23 @@ public class TencentBotController {
                 return tencentBotReturn;
             }
         }
+    }
+
+    @RequestMapping(value = "/picture")
+    @ApiOperation(value = "腾讯图片处理", notes = "腾讯图片处理")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "imageUrl",value = "imageUrl"),
+            @ApiImplicitParam(name = "decoration",value = "decoration")
+    })
+    public TencentPictureReturn tencentPicture(String imageUrl, String decoration) {
+        TencentPictureReturn tencentPictureReturn = new TencentPictureReturn();
+        AppletConfig tencent = appletConfigService.findByExpress("tencent");
+        if ("1".equals(tencent.getAppSecret())) {
+            tencentPictureReturn = TencentPictureUtils.tencentPicture(imageUrl, decoration);
+        }else {
+            tencentPictureReturn.setMsg("关机");
+        }
+        return tencentPictureReturn;
     }
 
 }
