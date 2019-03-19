@@ -1,4 +1,4 @@
-package xin.zhuyao.tencentbot.pojo;
+package xin.zhuyao.tencentbot.entitydto;
 
 import lombok.AccessLevel;
 import lombok.Getter;
@@ -16,7 +16,7 @@ import java.io.Serializable;
 @Setter
 @Getter
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class TencentPictureReturn implements Serializable {
+public class TencentPictureDto implements Serializable {
 
     /**
      * {

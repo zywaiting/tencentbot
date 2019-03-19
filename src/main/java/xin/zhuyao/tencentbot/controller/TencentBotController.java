@@ -8,11 +8,13 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import xin.zhuyao.tencentbot.entitydto.TencentPictureDto;
 import xin.zhuyao.tencentbot.pojo.AppletConfig;
-import xin.zhuyao.tencentbot.pojo.TencentBotReturn;
-import xin.zhuyao.tencentbot.pojo.TencentPictureReturn;
+import xin.zhuyao.tencentbot.entitydto.TencentBotDto;
 import xin.zhuyao.tencentbot.service.AppletConfigService;
+import xin.zhuyao.tencentbot.service.BaiDuYunService;
 import xin.zhuyao.tencentbot.utils.TencentBotUtils;
 import xin.zhuyao.tencentbot.utils.TencentPictureUtils;
 
@@ -34,32 +36,26 @@ public class TencentBotController {
     @RequestMapping(value = "/bot")
     @ApiOperation(value = "腾讯机器人", notes = "腾讯机器人")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "question",value = "boot"),
             @ApiImplicitParam(name = "session",value = "session"),
             @ApiImplicitParam(name = "question",value = "question")
     })
-    public TencentBotReturn tencentBot(String boot,String session, String question) throws Exception {
-        TencentBotReturn tencentBotReturn = new TencentBotReturn();
+    public TencentBotDto tencentBot(@RequestParam("session") String session,@RequestParam("question")  String question){
         AppletConfig tencent = appletConfigService.findByExpress("tencent");
-        if ("开机".equals(boot)) {
-            if (!"1".equals(tencent.getAppSecret())) {
-                appletConfigService.updateBootByExpress("1","tencent");
-            }
-            tencentBotReturn = TencentBotUtils.tencentBot(tencent.getAppId(),tencent.getApiKey(),session, question);
-            return tencentBotReturn;
-        } else if ("关机".equals(boot)) {
-            appletConfigService.updateBootByExpress("0","tencent");
-            tencentBotReturn.setMsg("关机");
-            return tencentBotReturn;
-        } else {
-            if ("1".equals(tencent.getAppSecret())) {
-                tencentBotReturn = TencentBotUtils.tencentBot(tencent.getAppId(), tencent.getApiKey(), session, question);
-                return tencentBotReturn;
-            } else {
-                tencentBotReturn.setMsg("关机");
-                return tencentBotReturn;
+        TencentBotDto tencentBotDto = null;
+        try {
+            tencentBotDto = TencentBotUtils.tencentBot(tencent.getAppId(),tencent.getApiKey(),session, question);
+        } catch (Exception e) {
+            try {
+                tencentBotDto = TencentBotUtils.tencentBot(tencent.getAppId(),tencent.getApiKey(),session, question);
+            } catch (Exception e1) {
+                try {
+                    tencentBotDto = TencentBotUtils.tencentBot(tencent.getAppId(),tencent.getApiKey(),session, question);
+                } catch (Exception e2) {
+                    e2.printStackTrace();
+                }
             }
         }
+        return tencentBotDto;
     }
 
     @RequestMapping(value = "/picture")
@@ -68,15 +64,9 @@ public class TencentBotController {
             @ApiImplicitParam(name = "imageUrl",value = "imageUrl"),
             @ApiImplicitParam(name = "decoration",value = "decoration")
     })
-    public TencentPictureReturn tencentPicture(String imageUrl, String decoration) {
-        TencentPictureReturn tencentPictureReturn = new TencentPictureReturn();
-        AppletConfig tencent = appletConfigService.findByExpress("tencent");
-        if ("1".equals(tencent.getAppSecret())) {
-            tencentPictureReturn = TencentPictureUtils.tencentPicture(imageUrl, decoration);
-        }else {
-            tencentPictureReturn.setMsg("关机");
-        }
-        return tencentPictureReturn;
+    public TencentPictureDto tencentPicture(String imageUrl, String decoration) {
+        TencentPictureDto tencentPictureDto = TencentPictureUtils.tencentPicture(imageUrl, decoration);
+        return tencentPictureDto;
     }
 
 }
