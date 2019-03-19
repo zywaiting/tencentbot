@@ -30,7 +30,7 @@ public class BaiDuYunController {
     @Autowired
     private BaiDuYunService baiDuYunService;
 
-    @RequestMapping(value = "/imgUrl")
+    @RequestMapping(value = "/message")
     @ApiOperation(value = "百度云地址", notes = "百度云地址")
     @ApiImplicitParam(name = "question",value = "question")
     public List<BaiDuYunDto> tencentBot(@RequestParam("question")  String question){

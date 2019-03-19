@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="xin.zhuyao.tencentbot.mapper.BaiDuYunMapper">
+
+    <select id="findByfileNameLike" resultType="xin.zhuyao.tencentbot.pojo.BaiDuYunEntity">
+        SELECT * FROM t_baiduyun_link WHERE file_name LIKE CONCAT('%',#{fileName},'%');
+    </select>
+
+</mapper>

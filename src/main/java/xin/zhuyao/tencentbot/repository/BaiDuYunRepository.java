@@ -15,5 +15,5 @@ import java.util.List;
  * @Description
  */
 public interface BaiDuYunRepository extends JpaRepository<BaiDuYunEntity, Integer>, JpaSpecificationExecutor<BaiDuYunEntity> {
-    List<BaiDuYunEntity> findByfileNameLike(String fileName);
+
 }

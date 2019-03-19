@@ -22,7 +22,7 @@ import java.util.Date;
 @Getter
 @Setter
 @FieldDefaults(level = AccessLevel.PRIVATE)
-@Api(value = "溴冷机", description = "溴冷机")
+@Api(value = "百度云", description = "百度云")
 public class BaiDuYunDto implements Serializable {
 
 
