@@ -2,7 +2,9 @@ package xin.zhuyao.tencentbot.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
-import xin.zhuyao.tencentbot.pojo.BaiDuYunEntity;
+import xin.zhuyao.tencentbot.pojo.WechatSubscriptionEntity;
+
+
 
 
 /**
@@ -11,6 +13,6 @@ import xin.zhuyao.tencentbot.pojo.BaiDuYunEntity;
  * @Version 1.0
  * @Description
  */
-public interface BaiDuYunRepository extends JpaRepository<BaiDuYunEntity, Integer>, JpaSpecificationExecutor<BaiDuYunEntity> {
+public interface WechatSubscriptionRepository extends JpaRepository<WechatSubscriptionEntity, Integer>, JpaSpecificationExecutor<WechatSubscriptionEntity> {
 
 }

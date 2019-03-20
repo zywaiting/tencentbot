@@ -14,7 +14,6 @@ import xin.zhuyao.tencentbot.entitydto.TencentPictureDto;
 import xin.zhuyao.tencentbot.pojo.AppletConfig;
 import xin.zhuyao.tencentbot.entitydto.TencentBotDto;
 import xin.zhuyao.tencentbot.service.AppletConfigService;
-import xin.zhuyao.tencentbot.service.BaiDuYunService;
 import xin.zhuyao.tencentbot.utils.TencentBotUtils;
 import xin.zhuyao.tencentbot.utils.TencentPictureUtils;
 
