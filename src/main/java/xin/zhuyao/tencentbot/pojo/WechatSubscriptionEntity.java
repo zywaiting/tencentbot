@@ -46,6 +46,9 @@ public class WechatSubscriptionEntity {
     @ApiModelProperty(value = "修改时间", dataType = "String")
     String updateDate;
 
+    @ApiModelProperty(value = "订阅号名称", dataType = "String")
+    String subscriptionName;
+
     @ApiModelProperty(value = "是否被使用过", dataType = "Boolean")
     Boolean employ;
 }
