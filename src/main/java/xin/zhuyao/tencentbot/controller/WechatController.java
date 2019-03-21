@@ -36,7 +36,6 @@ public class WechatController {
     @ApiOperation(value = "微信订阅号收集资料", notes = "微信订阅号收集资料")
     @ApiImplicitParam(name = "wechatSubscriptionEntityList",value = "wechatSubscriptionEntityList")
     public String tencentPicture(@RequestParam("wechatSubscriptionEntityList") String wechatSubscriptionEntityList) {
-        System.out.println(wechatSubscriptionEntityList);
         List<WechatSubscriptionEntity> wechatSubscriptionEntities = Arrays.asList(Utils.json(wechatSubscriptionEntityList, WechatSubscriptionEntity[].class));
         wechatService.saveAll(wechatSubscriptionEntities);
         return "ok";
